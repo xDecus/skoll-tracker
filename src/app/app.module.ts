@@ -10,6 +10,8 @@ import { MaterialModule } from './material/material.module';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
     declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
@@ -22,7 +24,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
             enabled: environment.production
         }),
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        StoreModule.forRoot(reducers, { metaReducers })
     ],
     providers: [],
     bootstrap: [AppComponent]
