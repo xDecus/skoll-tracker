@@ -6,3 +6,15 @@ input[type='number'] {
     }
     -moz-appearance: textfield;
 }
+
+mat-card + mat-card {
+    margin-top: 16px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-column-weight {
+    text-align: right;
+}
