@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-card-title>One Rep Max Calculator</mat-card-title>
+    <mat-card-content>
+        <p>
+            Allows you to calculate an estimation of your One Rep Max by providing the weight you
+            moved and for how many reps.
+        </p>
+        <form [formGroup]="form">
+            <mat-form-field>
+                <input
+                    required
+                    type="number"
+                    matInput
+                    placeholder="Weight"
+                    formControlName="weight"
+                />
+                <mat-error *ngIf="form.controls['weight'].invalid">{{
+                    getWeightErrorMessage()
+                }}</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input
+                    required
+                    type="number"
+                    matInput
+                    placeholder="Repetitions"
+                    formControlName="repetitions"
+                />
+                <mat-error *ngIf="form.controls['repetitions'].invalid">{{
+                    getRepetitionErrorMessage()
+                }}</mat-error>
+                <mat-hint></mat-hint>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="calculate()">Calculate</button>
+    </mat-card-actions>
+</mat-card>
