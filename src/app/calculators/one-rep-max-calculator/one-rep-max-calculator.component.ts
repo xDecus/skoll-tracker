@@ -56,7 +56,7 @@ export class OneRepMaxCalculatorComponent implements OnInit {
                 this.form.controls.weight.value,
                 this.form.controls.repetitions.value
             );
-            this.otherRepMaxes = this.calc.calculateNRepMax(this.form.controls.weight.value);
+            this.otherRepMaxes = this.calc.calculateNRepMax(this.oneRepMax);
             this.isCalculated = true;
         } else {
             Helper.validateAllFormFields(this.form);

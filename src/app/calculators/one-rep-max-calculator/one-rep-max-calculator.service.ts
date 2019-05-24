@@ -5,7 +5,7 @@ import { RepMax } from 'src/app/models/rep-max';
     providedIn: 'root'
 })
 export class OneRepMaxCalculatorService {
-    private calculationMethods: ((w: number, r: number) => number)[] = [this.brzycki, this.epley];
+    private calculationMethods: ((w: number, r: number) => number)[] = [this.epley];
 
     private percentageOfRM: { [repMax: number]: number } = {
         1: 1,
@@ -32,12 +32,16 @@ export class OneRepMaxCalculatorService {
             return;
         }
 
+        if (repetitions === 1) {
+            return weight;
+        }
+
         const countOfMethods = this.calculationMethods.length;
         const total = this.calculationMethods
             .map(method => method(weight, repetitions))
             .reduce((runningTotal, num) => runningTotal + num);
 
-        return total / countOfMethods;
+        return Math.round(total / countOfMethods);
     }
 
     /**
@@ -47,13 +51,9 @@ export class OneRepMaxCalculatorService {
     public calculateNRepMax(weight: number): RepMax[] {
         const result: RepMax[] = [];
         for (let i = 1; i <= 10; i++) {
-            result.push({ reps: i, weight: this.percentageOfRM[i] * weight });
+            result.push({ reps: i, weight: Math.round(this.percentageOfRM[i] * weight) });
         }
         return result;
-    }
-
-    private brzycki(w: number, r: number) {
-        return w * (36 / (37 - r));
     }
 
     private epley(w: number, r: number) {

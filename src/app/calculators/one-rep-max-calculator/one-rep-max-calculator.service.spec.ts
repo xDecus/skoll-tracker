@@ -19,9 +19,8 @@ describe('OneRepMaxCalculatorService', () => {
 
         const calculatedMax = service.calculateOneRepMax(w, r);
         const e = (service as any).epley(w, r);
-        const b = (service as any).brzycki(w, r);
 
-        expect(calculatedMax).toBe((e + b) / 2);
+        expect(calculatedMax).toBe(Math.round(e / 1));
     });
 
     it('should correctly calculate 1-10 rep maxes', () => {
@@ -31,5 +30,13 @@ describe('OneRepMaxCalculatorService', () => {
         for (let i = 0; i < expectedResults.length; i++) {
             expect(actualResult[i].weight).toBe(expectedResults[i]);
         }
+    });
+
+    it('should return correct numbers for one repetition', () => {
+        const input = 100;
+        const expectation = input;
+
+        const actual = service.calculateOneRepMax(input, 1);
+        expect(actual).toBe(expectation);
     });
 });
