@@ -29,11 +29,10 @@ export class OneRepMaxCalculatorComponent implements OnInit {
     }
 
     calculate() {
-        console.log('lol');
+        // TODO: notification service
         if (this.form.invalid) {
             return;
         }
-        console.log(this.form.controls.weight.value);
     }
 
     constructor() {}
