@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Helper } from 'src/app/helper';
 
 @Component({
     selector: 'skoll-one-rep-max-calculator',
@@ -8,8 +9,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class OneRepMaxCalculatorComponent implements OnInit {
     public form = new FormGroup({
-        weight: new FormControl('lol', [Validators.required, Validators.min(1)]),
-        repetitions: new FormControl(0, [
+        weight: new FormControl('', [Validators.required, Validators.min(1)]),
+        repetitions: new FormControl('', [
             Validators.required,
             Validators.min(1),
             Validators.max(10)
@@ -30,8 +31,10 @@ export class OneRepMaxCalculatorComponent implements OnInit {
 
     calculate() {
         // TODO: notification service
-        if (this.form.invalid) {
-            return;
+        if (this.form.valid) {
+            console.log('Great');
+        } else {
+            Helper.validateAllFormFields(this.form);
         }
     }
 
