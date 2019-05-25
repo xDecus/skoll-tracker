@@ -26,4 +26,4 @@ script:
     - ng build --prod
 
 after_success:
-    - firebase deploy --only hosting:skollstrength --token=${FIREBASE_TOKEN}
+    - firebase deploy --only hosting:skollstrength --token "$FIREBASE_TOKEN"
