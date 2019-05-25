@@ -25,7 +25,7 @@ export class OneRepMaxCalculatorService {
      * @param weight The weight that was lifted
      * @param repetitions How many times the weight was lifted
      */
-    public calculateOneRepMax(repMax: RepMax): number {
+    public calculateOneRepMax(repMax: RepMax, round: boolean = true): number {
         if (isNaN(repMax.weight) || isNaN(repMax.reps)) {
             // TODO: error handling
             console.log('not a number');
@@ -37,11 +37,12 @@ export class OneRepMaxCalculatorService {
         }
 
         const countOfMethods = this.calculationMethods.length;
-        const total = this.calculationMethods
-            .map(method => method(repMax.weight, repMax.reps))
-            .reduce((runningTotal, num) => runningTotal + num);
+        const total =
+            this.calculationMethods
+                .map(method => method(repMax.weight, repMax.reps))
+                .reduce((runningTotal, num) => runningTotal + num) / countOfMethods;
 
-        return Math.round(total / countOfMethods);
+        return round ? Math.round(total) : total;
     }
 
     /**

@@ -15,6 +15,8 @@ export class WilksCalculatorComponent implements OnInit, OnDestroy {
      * Whether a result was calculated
      */
     public isCalculated = false;
+    public powerliftingTotal: number;
+    public wilksNumber: number;
 
     public currentUnitSuffix = 'kg';
 
@@ -33,6 +35,9 @@ export class WilksCalculatorComponent implements OnInit, OnDestroy {
         deadliftReps: new FormControl(1, [Validators.required])
     });
 
+    /**
+     * Calculates the wilks and the powerlifting total based on user input
+     */
     public calculate() {
         if (!this.form.valid) {
             Helper.validateAllFormFields(this.form);
@@ -54,16 +59,19 @@ export class WilksCalculatorComponent implements OnInit, OnDestroy {
             const sex = this.form.controls.sex.value;
             const unit = this.form.controls.unit.value;
 
-            const total = this.wilks.calculate(
+            const result = this.wilksCalc.calculate(
                 [squatMax, benchMax, deadliftMax],
                 bodyweight,
                 sex,
                 unit
             );
+            this.isCalculated = true;
+            this.wilksNumber = result.wilks;
+            this.powerliftingTotal = result.total;
         }
     }
 
-    constructor(public wilks: WilksCalculatorService) {}
+    constructor(public wilksCalc: WilksCalculatorService) {}
 
     private getRepMaxFromControls(
         weightControl: AbstractControl,

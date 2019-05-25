@@ -1,3 +1,5 @@
+@import 'variables';
+
 .mat-form-field {
     display: initial;
 }
@@ -26,4 +28,23 @@ input[type='number'] {
 
 .right-align {
     text-align: right;
+}
+
+.big-text {
+    color: $skoll-primary;
+    margin-bottom: 16px;
+    margin-top: 8px;
+    font-size: 40px;
+    font-weight: 600;
+    display: block;
+}
+
+mat-card + mat-card {
+    margin-top: 16px;
+}
+
+em {
+    color: $skoll-primary;
+    font-size: 16px;
+    font-weight: 500;
 }

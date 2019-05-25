@@ -1,9 +1,4 @@
-@import 'variables';
 @import 'skoll-base';
-
-mat-card + mat-card {
-    margin-top: 16px;
-}
 
 table {
     width: 100%;
@@ -12,15 +7,6 @@ table {
 .mat-column-weight {
     text-align: right;
     color: $skoll-primary;
-}
-
-.big-text {
-    color: $skoll-primary;
-    margin-bottom: 16px;
-    margin-top: 8px;
-    font-size: 40px;
-    font-weight: 600;
-    display: block;
 }
 
 form {

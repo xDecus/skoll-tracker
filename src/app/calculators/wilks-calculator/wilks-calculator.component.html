@@ -8,8 +8,8 @@
                     <div class="col-6">
                         <mat-form-field>
                             <mat-select placeholder="Units" formControlName="unit">
-                                <mat-option *ngFor="let unit of wilks?.units" [value]="unit.id">{{
-                                    unit.name
+                                <mat-option *ngFor="let unit of wilksCalc?.units" value="unit">{{
+                                    unit
                                 }}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -17,8 +17,8 @@
                     <div class="col-6">
                         <mat-form-field>
                             <mat-select placeholder="Sex" formControlName="sex">
-                                <mat-option *ngFor="let sex of wilks?.sexes" [value]="sex.id">{{
-                                    sex.name
+                                <mat-option *ngFor="let sex of wilksCalc?.sexes" value="sex">{{
+                                    sex
                                 }}</mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -48,7 +48,7 @@
             </p>
             <div class="row">
                 <div class="col-12">
-                    <mat-card-subtitle>Back Squat</mat-card-subtitle>
+                    <mat-card-subtitle><em>S</em>quat</mat-card-subtitle>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <mat-card-subtitle>Bench Press</mat-card-subtitle>
+                    <mat-card-subtitle><em>B</em>ench Press</mat-card-subtitle>
                 </div>
             </div>
             <div class="row">
@@ -98,19 +98,20 @@
                 <div class="col-6">
                     <mat-form-field>
                         <input
+                            class="right-align"
                             required
                             type="number"
                             matInput
                             placeholder="Weight"
                             formControlName="benchWeight"
                         />
-                        <span matSuffix>{{ currentUnitSuffix }}</span>
+                        <span class="number-suffix" matSuffix>{{ currentUnitSuffix }}</span>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <mat-card-subtitle>Deadlift</mat-card-subtitle>
+                    <mat-card-subtitle><em>D</em>eadlift</mat-card-subtitle>
                 </div>
             </div>
             <div class="row">
@@ -128,13 +129,14 @@
                 <div class="col-6">
                     <mat-form-field>
                         <input
+                            class="right-align"
                             required
                             type="number"
                             matInput
                             placeholder="Weight"
                             formControlName="deadliftWeight"
                         />
-                        <span matSuffix>{{ currentUnitSuffix }}</span>
+                        <span class="number-suffix" matSuffix>{{ currentUnitSuffix }}</span>
                     </mat-form-field>
                 </div>
             </div>
@@ -145,5 +147,24 @@
     </mat-card-actions>
 </mat-card>
 <mat-card *ngIf="isCalculated">
-    <mat-card-content> </mat-card-content>
+    <mat-card-content>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <mat-card-subtitle>Wilks</mat-card-subtitle>
+                </div>
+                <div class="col-6">
+                    <mat-card-subtitle>Powerlifting Total</mat-card-subtitle>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <span class="big-text">{{ this.wilksNumber }}</span>
+                </div>
+                <div class="col-6">
+                    <span class="big-text">{{ this.powerliftingTotal }}</span>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
 </mat-card>
