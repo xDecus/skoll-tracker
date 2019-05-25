@@ -24,8 +24,8 @@ export class WilksCalculatorComponent implements OnInit, OnDestroy {
      * The this.form group of the calculator
      */
     public form = new FormGroup({
-        unit: new FormControl(1, [Validators.required]),
-        sex: new FormControl(1, [Validators.required]),
+        unit: new FormControl('metric', [Validators.required]),
+        sex: new FormControl('male', [Validators.required]),
         bodyweight: new FormControl('', [Validators.required]),
         squatWeight: new FormControl('', [Validators.required]),
         squatReps: new FormControl(1, [Validators.required]),

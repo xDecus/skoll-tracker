@@ -8,7 +8,7 @@
                     <div class="col-6">
                         <mat-form-field>
                             <mat-select placeholder="Units" formControlName="unit">
-                                <mat-option *ngFor="let unit of wilksCalc?.units" value="unit">{{
+                                <mat-option *ngFor="let unit of wilksCalc?.units" [value]="unit">{{
                                     unit
                                 }}</mat-option>
                             </mat-select>
@@ -17,7 +17,7 @@
                     <div class="col-6">
                         <mat-form-field>
                             <mat-select placeholder="Sex" formControlName="sex">
-                                <mat-option *ngFor="let sex of wilksCalc?.sexes" value="sex">{{
+                                <mat-option *ngFor="let sex of wilksCalc?.sexes" [value]="sex">{{
                                     sex
                                 }}</mat-option>
                             </mat-select>
