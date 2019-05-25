@@ -6,6 +6,13 @@ sudo: required
 cache:
     yarn: true
 
+deploy:
+    provider: firebase
+    project: skoll
+    skip_cleanup: true
+    token:
+        secure: $FIREBASE_TOKEN
+
 branches:
     only:
         - master
@@ -24,6 +31,3 @@ before_script:
 script:
     - yarn ci:test
     - ng build --prod
-
-after_success:
-    - firebase deploy --only hosting:skollstrength --token "$FIREBASE_TOKEN" --debug

@@ -1,5 +1,14 @@
 {
   "projects": {
-    "default": "skoll-7737d"
+    "skoll": "skoll-7737d"
+  },
+  "targets": {
+    "skoll": {
+      "hosting": {
+        "main": [
+          "skollstrength"
+        ]
+      }
+    }
   }
 }
