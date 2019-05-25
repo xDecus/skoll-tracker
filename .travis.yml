@@ -12,5 +12,5 @@ before_script:
     - yarn global add @angular/cli
 
 script:
-    - ng test
+    - ng test --browsers Chrome Headless
     - ng build --prod --base-href https://xdecus.github.io/skoll-tracker/
