@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { WilksCalculatorService } from './wilks-calculator.service';
 import { RepMax } from 'src/app/models/rep-max';
-import { OneRepMaxCalculatorService } from '../one-rep-max-calculator/one-rep-max-calculator.service';
-import { formArrayNameProvider } from '@angular/forms/src/directives/reactive_directives/form_group_name';
 import { Helper } from 'src/app/helper';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
     selector: 'skoll-wilks-calculator',
     templateUrl: './wilks-calculator.component.html',
     styleUrls: ['./wilks-calculator.component.scss']
 })
-export class WilksCalculatorComponent implements OnInit {
+export class WilksCalculatorComponent implements OnInit, OnDestroy {
     /**
      * Whether a result was calculated
      */
     public isCalculated = false;
+
+    public currentUnitSuffix = 'kg';
 
     /**
      * The this.form group of the calculator
@@ -25,11 +26,11 @@ export class WilksCalculatorComponent implements OnInit {
         sex: new FormControl(1, [Validators.required]),
         bodyweight: new FormControl('', [Validators.required]),
         squatWeight: new FormControl('', [Validators.required]),
-        squatReps: new FormControl('', [Validators.required]),
+        squatReps: new FormControl(1, [Validators.required]),
         benchWeight: new FormControl('', [Validators.required]),
-        benchReps: new FormControl('', [Validators.required]),
+        benchReps: new FormControl(1, [Validators.required]),
         deadliftWeight: new FormControl('', [Validators.required]),
-        deadliftReps: new FormControl('', [Validators.required])
+        deadliftReps: new FormControl(1, [Validators.required])
     });
 
     public calculate() {
@@ -71,5 +72,18 @@ export class WilksCalculatorComponent implements OnInit {
         return { weight: weightControl.value, reps: repsControl.value };
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.form.controls.unit.valueChanges.pipe(untilDestroyed(this)).subscribe(val => {
+            switch (val) {
+                case 1:
+                    this.currentUnitSuffix = 'kg';
+                    break;
+                case 2:
+                    this.currentUnitSuffix = 'lbs';
+                    break;
+            }
+        });
+    }
+
+    ngOnDestroy() {}
 }

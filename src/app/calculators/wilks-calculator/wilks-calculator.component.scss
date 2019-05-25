@@ -1,5 +1,18 @@
 @import 'skoll-base';
 
-form {
+.description {
+    margin-bottom: 16px;
+}
+
+.mat-card .mat-divider-horizontal {
+    position: relative;
+    margin-top: 8px;
+}
+
+mat-divider + p {
     margin-top: 16px;
+}
+
+.number-suffix {
+    padding-left: 8px;
 }
