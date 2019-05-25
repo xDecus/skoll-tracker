@@ -24,4 +24,6 @@ before_script:
 script:
     - yarn ci:test
     - ng build --prod
-    - firebase deploy --only hosting:skollstrength --token $FIREBASE_TOKEN
+
+after_success:
+    - firebase deploy --only hosting:skollstrength --token=${FIREBASE_TOKEN}
