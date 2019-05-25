@@ -6,6 +6,15 @@ sudo: required
 cache:
     yarn: true
 
+deploy:
+    provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    keep_history: true
+    on:
+        branch: master
+    local_dir: dist/skoll-tracker
+
 branches:
     only:
         - master
