@@ -5,7 +5,7 @@
             Allows you to calculate an estimation of your One Rep Max by providing the weight you
             moved and for how many reps.
         </p>
-        <form [formGroup]="form">
+        <form [formGroup]="form" (keyup.enter)="calculate()">
             <mat-form-field>
                 <input
                     required
