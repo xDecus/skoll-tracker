@@ -6,12 +6,6 @@ sudo: required
 cache:
     yarn: true
 
-deploy:
-    provider: firebase
-    skip_cleanup: true
-    token:
-        secure: $FIREBASE_TOKEN
-
 branches:
     only:
         - master
@@ -25,7 +19,9 @@ before_install:
 
 before_script:
     - yarn global add @angular/cli
+    - yarn global add @firebase-tools
 
 script:
     - yarn ci:test
     - ng build --prod
+    - firebase deploy --only hosting:skollstrength --token $FIREBASE_TOKEN
