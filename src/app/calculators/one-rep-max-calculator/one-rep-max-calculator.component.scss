@@ -27,6 +27,19 @@ table {
     color: $skoll-primary;
     margin-bottom: 16px;
     margin-top: 8px;
-    font-size: 32px;
+    font-size: 40px;
+    font-weight: 600;
     display: block;
+}
+
+form {
+    margin-top: 8px;
+}
+
+.mat-header-cell {
+    font-size: 16px;
+}
+
+.mat-cell {
+    font-size: 16px;
 }

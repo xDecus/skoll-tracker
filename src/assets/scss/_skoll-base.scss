@@ -6,6 +6,11 @@
     padding: 0;
 }
 
-td {
+td,
+th {
     vertical-align: middle;
+}
+
+p {
+    line-height: 1.5;
 }
