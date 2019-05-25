@@ -62,7 +62,7 @@ export class WilksCalculatorService {
      * @param maxes The rep maxes of the lifter in Squat, bench and deadlift.
      * @param bodyweight The bodyweight of the lifter in the specified unit
      * @param sex The biological sex of the lifter
-     * @param unit
+     * @param unit The unit of the provided values
      */
     public calculate(
         maxes: RepMax[],
