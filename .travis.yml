@@ -19,7 +19,7 @@ before_install:
 
 before_script:
     - yarn global add @angular/cli
-    - yarn global add @firebase-tools
+    - yarn global add firebase-tools
 
 script:
     - yarn ci:test
