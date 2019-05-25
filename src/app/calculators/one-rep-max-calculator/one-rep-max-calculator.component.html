@@ -6,31 +6,39 @@
             moved and for how many reps.
         </p>
         <form [formGroup]="form" (keyup.enter)="calculate()">
-            <mat-form-field>
-                <input
-                    required
-                    type="number"
-                    matInput
-                    placeholder="Repetitions"
-                    formControlName="repetitions"
-                />
-                <mat-error *ngIf="form.controls['repetitions'].invalid">{{
-                    getRepetitionErrorMessage()
-                }}</mat-error>
-                <mat-hint></mat-hint>
-            </mat-form-field>
-            <mat-form-field>
-                <input
-                    required
-                    type="number"
-                    matInput
-                    placeholder="Weight"
-                    formControlName="weight"
-                />
-                <mat-error *ngIf="form.controls['weight'].invalid">{{
-                    getWeightErrorMessage()
-                }}</mat-error>
-            </mat-form-field>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input
+                                required
+                                type="number"
+                                matInput
+                                placeholder="Repetitions"
+                                formControlName="repetitions"
+                            />
+                            <mat-error *ngIf="form.controls['repetitions'].invalid">{{
+                                getRepetitionErrorMessage()
+                            }}</mat-error>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input
+                                required
+                                type="number"
+                                matInput
+                                placeholder="Weight"
+                                formControlName="weight"
+                            />
+                            <mat-error *ngIf="form.controls['weight'].invalid">{{
+                                getWeightErrorMessage()
+                            }}</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
         </form>
     </mat-card-content>
     <mat-card-actions>
