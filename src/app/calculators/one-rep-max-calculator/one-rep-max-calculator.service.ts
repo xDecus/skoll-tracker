@@ -25,20 +25,20 @@ export class OneRepMaxCalculatorService {
      * @param weight The weight that was lifted
      * @param repetitions How many times the weight was lifted
      */
-    public calculateOneRepMax(weight: number, repetitions: number): number {
-        if (isNaN(weight) || isNaN(repetitions)) {
+    public calculateOneRepMax(repMax: RepMax): number {
+        if (isNaN(repMax.weight) || isNaN(repMax.reps)) {
             // TODO: error handling
             console.log('not a number');
             return;
         }
 
-        if (repetitions === 1) {
-            return weight;
+        if (repMax.reps === 1) {
+            return repMax.weight;
         }
 
         const countOfMethods = this.calculationMethods.length;
         const total = this.calculationMethods
-            .map(method => method(weight, repetitions))
+            .map(method => method(repMax.weight, repMax.reps))
             .reduce((runningTotal, num) => runningTotal + num);
 
         return Math.round(total / countOfMethods);
@@ -46,12 +46,21 @@ export class OneRepMaxCalculatorService {
 
     /**
      * Returns the estimated rep maxes in a range of 1-10 reps based on the given one rep max.
-     * @param weight The one rep max of the lifter
+     * @param weight How much weight was moved
+     * @param repetitions How many repetitions this weight was moved.
      */
-    public calculateNRepMax(weight: number): RepMax[] {
+    public calculateNRepMax(repMax: RepMax, oneRM: number = null): RepMax[] {
+        if (oneRM === null) {
+            oneRM = this.calculateOneRepMax(repMax);
+        }
+
         const result: RepMax[] = [];
         for (let i = 1; i <= 10; i++) {
-            result.push({ reps: i, weight: Math.round(this.percentageOfRM[i] * weight) });
+            if (repMax.reps === i) {
+                result.push({ reps: i, weight: repMax.weight });
+                continue;
+            }
+            result.push({ reps: i, weight: Math.round(this.percentageOfRM[i] * oneRM) });
         }
         return result;
     }

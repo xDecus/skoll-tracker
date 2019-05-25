@@ -1,3 +1,5 @@
+@import 'src/assets/scss/variables';
+
 input[type='number'] {
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
@@ -17,5 +19,13 @@ table {
 
 .mat-column-weight {
     text-align: right;
-    color: #b00d2c;
+    color: $skoll-primary;
+}
+
+.big-text {
+    color: $skoll-primary;
+    margin-bottom: 16px;
+    margin-top: 8px;
+    font-size: 32px;
+    display: block;
 }

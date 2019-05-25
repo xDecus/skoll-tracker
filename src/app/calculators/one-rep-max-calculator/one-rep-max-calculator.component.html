@@ -40,7 +40,7 @@
 <mat-card *ngIf="isCalculated">
     <mat-card-content>
         <mat-card-subtitle>Estimated one rep max</mat-card-subtitle>
-        <span>{{ this.oneRepMax }}</span>
+        <span class="big-text">{{ this.oneRepMax }}</span>
         <mat-card-subtitle>Other estimated maxes</mat-card-subtitle>
         <table mat-table [dataSource]="otherRepMaxes" class="mat-elevation-z8">
             <ng-container matColumnDef="reps">

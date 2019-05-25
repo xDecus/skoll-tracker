@@ -1,0 +1,17 @@
+@import '~@angular/material/theming';
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$skoll-primary-palette: mat-palette($mat-teal);
+$skoll-accent-palette: mat-palette($mat-pink, A200, A100, A400);
+$skoll-background-color: #050f21;
+
+// The warn palette is optional (defaults to red).
+$skoll-warn-palette: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$skoll-theme: mat-dark-theme($skoll-primary-palette, $skoll-accent-palette, $skoll-warn-palette);
+
+$skoll-primary: mat-color($skoll-primary-palette);
+$skoll-accent: mat-color($skoll-accent-palette);

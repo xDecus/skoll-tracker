@@ -52,11 +52,12 @@ export class OneRepMaxCalculatorComponent implements OnInit {
     public calculate() {
         // TODO: notification service
         if (this.form.valid) {
-            this.oneRepMax = this.calc.calculateOneRepMax(
-                this.form.controls.weight.value,
-                this.form.controls.repetitions.value
-            );
-            this.otherRepMaxes = this.calc.calculateNRepMax(this.oneRepMax);
+            const repMax: RepMax = {
+                weight: this.form.controls.weight.value,
+                reps: this.form.controls.repetitions.value
+            };
+            this.oneRepMax = this.calc.calculateOneRepMax(repMax);
+            this.otherRepMaxes = this.calc.calculateNRepMax(repMax, this.oneRepMax);
             this.isCalculated = true;
         } else {
             Helper.validateAllFormFields(this.form);
