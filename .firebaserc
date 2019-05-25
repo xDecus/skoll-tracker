@@ -3,7 +3,7 @@
     "skoll": "skoll-7737d"
   },
   "targets": {
-    "skoll": {
+    "skoll-7737d": {
       "hosting": {
         "main": [
           "skollstrength"
