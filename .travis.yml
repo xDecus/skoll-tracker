@@ -7,13 +7,10 @@ cache:
     yarn: true
 
 deploy:
-    provider: pages
+    provider: firebase
     skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    keep_history: true
-    on:
-        branch: master
-    local_dir: dist/skoll-tracker
+    token:
+        secure: $FIREBASE_TOKEN
 
 branches:
     only:
@@ -31,4 +28,4 @@ before_script:
 
 script:
     - yarn ci:test
-    - ng build --prod --base-href https://xdecus.github.io/skoll-tracker/
+    - ng build --prod

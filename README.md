@@ -1,4 +1,4 @@
-# SkollTracker
+# Skoll Strength
 
 [![Build Status](https://travis-ci.com/xDecus/skoll-tracker.svg?branch=master)](https://travis-ci.com/xDecus/skoll-tracker)
 

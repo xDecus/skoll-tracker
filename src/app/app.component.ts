@@ -7,7 +7,6 @@ import { MediaMatcher } from '@angular/cdk/layout';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
-    title = 'skoll-tracker';
     mobileQuery: MediaQueryList;
 
     Mainlinks = [

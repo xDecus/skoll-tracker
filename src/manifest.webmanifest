@@ -1,7 +1,7 @@
 {
-    "name": "Skoll Tracker",
-    "short_name": "Skoll Tracker",
-    "theme_color": "#9c27b0",
+    "name": "Skoll Strength",
+    "short_name": "Skoll Strength",
+    "theme_color": "#009688",
     "background_color": "#303030",
     "display": "standalone",
     "scope": "/",
