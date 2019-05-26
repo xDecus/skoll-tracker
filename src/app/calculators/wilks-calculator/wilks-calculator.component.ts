@@ -17,11 +17,25 @@ export class WilksCalculatorComponent implements OnInit, OnDestroy {
      * Whether a result was calculated
      */
     public isCalculated = false;
+    /**
+     * The calculated powerlifting total (S,B,D)
+     */
     public powerliftingTotal: number;
+
+    /**
+     * The calculated wilks score of the lifter
+     */
     public wilksNumber: number;
+
+    /**
+     * The calculated IPF points of the lifter
+     */
     public ipfPoints: number;
 
-    public currentUnitSuffix = 'kg';
+    /**
+     * The current unit suffix based on the selected unit
+     */
+    public currentUnitSuffix: 'kg' | 'lbs' = 'kg';
 
     /**
      * Available units for calculation.
@@ -33,10 +47,13 @@ export class WilksCalculatorComponent implements OnInit, OnDestroy {
      */
     public sexes: string[] = ['male', 'female'];
 
+    /**
+     * Different equipment types for IPF point calculation
+     */
     public equipment: string[] = ['raw', 'equipped'];
 
     /**
-     * The this.form group of the calculator
+     * The form group of the calculator
      */
     public form = new FormGroup({
         unit: new FormControl('metric', [Validators.required]),
@@ -52,7 +69,7 @@ export class WilksCalculatorComponent implements OnInit, OnDestroy {
     });
 
     /**
-     * Calculates the wilks and the powerlifting total based on user input
+     * Calculates the wilks, ipf points and the powerlifting total based on user input
      */
     public calculate() {
         if (!this.form.valid) {

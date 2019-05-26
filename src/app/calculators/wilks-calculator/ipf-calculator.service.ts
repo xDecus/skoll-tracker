@@ -5,6 +5,9 @@ import { UnitConverterService } from '../unit-converter.service';
     providedIn: 'root'
 })
 export class IPFCalculatorService {
+    /**
+     * Contains all variables used in the calculation of IPF points
+     */
     private variables = {
         male: {
             raw: {
@@ -36,6 +39,15 @@ export class IPFCalculatorService {
         }
     };
 
+    /**
+     * Calculates the IPF Points of the lifter.
+     * * Converts the given total & weight numbers to metric units if necessary
+     * @param total The powerlifting total (S, B, D) of the lifter in the used unit
+     * @param bodyweight The bodyweight of the lifter in the used unit
+     * @param sex The biological sex of the lifter
+     * @param unit The unit in which the numbers were provided
+     * @param equipment Whether the lift numbers are raw or equipped
+     */
     public calculate(
         total: number,
         bodyweight: number,
@@ -53,5 +65,6 @@ export class IPFCalculatorService {
         const points = 500 + (100 * (total - mean)) / dev;
         return Math.round(points);
     }
+
     constructor(private converter: UnitConverterService) {}
 }

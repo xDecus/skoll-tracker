@@ -10,7 +10,7 @@ export class AppComponent implements OnDestroy {
     mobileQuery: MediaQueryList;
 
     Mainlinks = [
-        { label: 'Wilks Calculator', target: '/calculators/wilks', icon: 'list' },
+        { label: 'Total Calculator', target: '/calculators/wilks', icon: 'list' },
         { label: 'One Rep Max Calculator', target: '/calculators/1rm', icon: 'star' },
         { label: 'TDEE Calculator', target: '/calculators/tdee', icon: 'directions_run' }
     ];
