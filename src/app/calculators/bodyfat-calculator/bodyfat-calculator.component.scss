@@ -1,0 +1,25 @@
+@import 'skoll-base';
+
+mat-divider + p {
+    margin-top: 16px;
+}
+
+.number-suffix {
+    padding-left: 8px;
+}
+.description {
+    margin-bottom: 16px;
+}
+
+.mat-card .mat-divider-horizontal {
+    position: relative;
+    margin-top: 24px;
+}
+
+.female-info {
+    margin-bottom: 24px;
+}
+
+.mat-card-actions .mat-raised-button {
+    margin-top: 16px;
+}

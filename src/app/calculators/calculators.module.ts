@@ -7,9 +7,10 @@ import { OneRepMaxCalculatorComponent } from './one-rep-max-calculator/one-rep-m
 import { TDEECalculatorComponent } from './tdeecalculator/tdeecalculator.component';
 import { MaterialModule } from '../material/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BodyfatCalculatorComponent } from './bodyfat-calculator/bodyfat-calculator.component';
 
 @NgModule({
-    declarations: [WilksCalculatorComponent, OneRepMaxCalculatorComponent, TDEECalculatorComponent],
+    declarations: [WilksCalculatorComponent, OneRepMaxCalculatorComponent, TDEECalculatorComponent, BodyfatCalculatorComponent],
     imports: [
         CommonModule,
         CalculatorsRoutingModule,

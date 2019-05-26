@@ -12,7 +12,8 @@ export class AppComponent implements OnDestroy {
     Mainlinks = [
         { label: 'Total Calculator', target: '/calculators/wilks', icon: 'list' },
         { label: 'One Rep Max Calculator', target: '/calculators/1rm', icon: 'star' },
-        { label: 'TDEE Calculator', target: '/calculators/tdee', icon: 'directions_run' }
+        { label: 'TDEE Calculator', target: '/calculators/tdee', icon: 'directions_run' },
+        { label: 'Bodyfat Calculator', target: '/calculators/bodyfat', icon: 'accessibility' }
     ];
     optionLinks = [
         { label: 'Settings', target: '/settings', icon: 'settings' },

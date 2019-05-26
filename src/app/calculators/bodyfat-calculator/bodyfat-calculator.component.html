@@ -1,0 +1,122 @@
+<mat-card>
+    <mat-card-title>Navy Bodyfat Calculator</mat-card-title>
+    <mat-card-content>
+        <p class="description">
+            Allows you to calculate an estimation of your current body fat percent. Uses the U.S.
+            Navy fitness formula. This calculator is for illustrative purposes only, results are
+            estimations and should not be used as a substitute for advice from a medical
+            professional
+        </p>
+        <form [formGroup]="form" (keyup.enter)="calculate()">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Units" formControlName="unit">
+                                <mat-option *ngFor="let unit of units" [value]="unit">{{
+                                    unit
+                                }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Sex" formControlName="sex">
+                                <mat-option *ngFor="let sex of sexes" [value]="sex">{{
+                                    sex
+                                }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input
+                                class="right-align"
+                                required
+                                type="number"
+                                matInput
+                                placeholder="Height"
+                                formControlName="height"
+                            />
+                            <span class="number-suffix" matSuffix>{{ suffix }}</span>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input
+                                class="right-align"
+                                required
+                                type="number"
+                                matInput
+                                placeholder="Neck"
+                                formControlName="neckCircumference"
+                            />
+                            <span class="number-suffix" matSuffix>{{ suffix }}</span>
+                            <mat-hint>Measure directly under the Adam's apple.</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input
+                                class="right-align"
+                                required
+                                type="number"
+                                matInput
+                                placeholder="Abdomen"
+                                formControlName="abdomenCircumference"
+                            />
+                            <span class="number-suffix" matSuffix>{{ suffix }}</span>
+                            <mat-hint>Measure at the level of the navel. </mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-divider *ngIf="form.controls['sex'].value === 'female'"></mat-divider>
+                <div class="row female-info" *ngIf="form.controls['sex'].value === 'female'">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input
+                                class="right-align"
+                                required
+                                type="number"
+                                matInput
+                                placeholder="Waist"
+                                formControlName="waistCircumference"
+                            />
+                            <span class="number-suffix" matSuffix>{{ suffix }}</span>
+                            <mat-hint
+                                >Measure at the slimmest point between lower chest and navel.
+                            </mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input
+                                class="right-align"
+                                required
+                                type="number"
+                                matInput
+                                placeholder="Hips"
+                                formControlName="hipCircumference"
+                            />
+                            <span class="number-suffix" matSuffix>{{ suffix }}</span>
+                            <mat-hint>Take the broadest butt circumference possible. </mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="calculate()">Calculate</button>
+    </mat-card-actions>
+</mat-card>
+<mat-card *ngIf="isCalculated">
+    <mat-card-content>
+        <mat-card-subtitle>Bodyfat percentage</mat-card-subtitle>
+        <span class="big-text">{{ this.bodyfatPercentage }} %</span>
+    </mat-card-content>
+</mat-card>
