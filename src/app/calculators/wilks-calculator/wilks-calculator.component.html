@@ -1,14 +1,14 @@
 <mat-card>
-    <mat-card-title>Wilks Calculator</mat-card-title>
+    <mat-card-title>Wilks/IPF Calculator</mat-card-title>
     <mat-card-content>
-        <p class="description">Calculates your wilks score.</p>
+        <p class="description">Calculates your wilks score and IPF points.</p>
         <form [formGroup]="form" (keyup.enter)="calculate()">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-6">
                         <mat-form-field>
                             <mat-select placeholder="Units" formControlName="unit">
-                                <mat-option *ngFor="let unit of wilksCalc?.units" [value]="unit">{{
+                                <mat-option *ngFor="let unit of units" [value]="unit">{{
                                     unit
                                 }}</mat-option>
                             </mat-select>
@@ -17,7 +17,7 @@
                     <div class="col-6">
                         <mat-form-field>
                             <mat-select placeholder="Sex" formControlName="sex">
-                                <mat-option *ngFor="let sex of wilksCalc?.sexes" [value]="sex">{{
+                                <mat-option *ngFor="let sex of sexes" [value]="sex">{{
                                     sex
                                 }}</mat-option>
                             </mat-select>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-6">
                         <mat-form-field>
                             <input
                                 class="right-align"
@@ -37,6 +37,15 @@
                             />
                             <span class="number-suffix" matSuffix>{{ currentUnitSuffix }}</span>
                             <mat-error *ngIf="form.controls['bodyweight'].invalid"></mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field>
+                            <mat-select placeholder="Equipment" formControlName="equipment">
+                                <mat-option *ngFor="let eq of equipment" [value]="eq">{{
+                                    eq
+                                }}</mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
                 </div>
@@ -154,13 +163,23 @@
                     <mat-card-subtitle>Wilks</mat-card-subtitle>
                 </div>
                 <div class="col-6">
-                    <mat-card-subtitle>Powerlifting Total</mat-card-subtitle>
+                    <mat-card-subtitle>IPF Points</mat-card-subtitle>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <span class="big-text">{{ this.wilksNumber }}</span>
                 </div>
+                <div class="col-6">
+                    <span class="big-text">{{ this.ipfPoints }}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-card-subtitle>Powerlifting Total</mat-card-subtitle>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-6">
                     <span class="big-text">{{ this.powerliftingTotal }}</span>
                 </div>
