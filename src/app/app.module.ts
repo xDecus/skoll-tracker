@@ -10,6 +10,8 @@ import { MaterialModule } from './material/material.module';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
     declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
@@ -21,6 +23,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production
         }),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule,
         FormsModule,
         ReactiveFormsModule
     ],

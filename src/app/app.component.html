@@ -16,6 +16,10 @@
             [fixedInViewport]="mobileQuery.matches"
             fixedTopGap="56"
         >
+            <p class="welcome-message" *ngIf="fireAuth.user | async as user">
+                Signed in as {{ user.displayName }}
+            </p>
+            <mat-divider></mat-divider>
             <mat-nav-list>
                 <a
                     mat-list-item
@@ -36,6 +40,16 @@
                     <mat-icon>{{ optionLink.icon }}</mat-icon>
 
                     {{ optionLink.label }}</a
+                >
+                <a *ngIf="fireAuth.user | async" mat-list-item (click)="logout()">
+                    <mat-icon>not_interested</mat-icon>
+
+                    Logout</a
+                >
+                <a *ngIf="!(fireAuth.user | async)" mat-list-item (click)="login()">
+                    <mat-icon>exit_to_app</mat-icon>
+
+                    Login</a
                 >
             </mat-nav-list>
         </mat-sidenav>

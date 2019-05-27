@@ -1,5 +1,7 @@
 import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
 
 @Component({
     selector: 'app-root',
@@ -17,15 +19,29 @@ export class AppComponent implements OnDestroy {
     ];
     optionLinks = [
         { label: 'Settings', target: '/settings', icon: 'settings' },
-        { label: 'Help & FAQs', target: '/help', icon: 'help' },
-        { label: 'Logout', target: '/logout', icon: 'exit_to_app' }
+        { label: 'Help & FAQs', target: '/help', icon: 'help' }
     ];
 
     private _mobileQueryListener: () => void;
-    constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+
+    constructor(
+        changeDetectorRef: ChangeDetectorRef,
+        media: MediaMatcher,
+        public fireAuth: AngularFireAuth
+    ) {
         this.mobileQuery = media.matchMedia('(max-width: 600px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         this.mobileQuery.addListener(this._mobileQueryListener);
+    }
+
+    public login() {
+        this.fireAuth.auth
+            .signInWithPopup(new auth.GoogleAuthProvider())
+            .then(val => console.log(val.user.email));
+    }
+
+    public logout() {
+        this.fireAuth.auth.signOut();
     }
 
     ngOnDestroy(): void {

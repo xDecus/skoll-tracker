@@ -3,12 +3,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireAuth } from '@angular/fire/auth';
+class AngularFireAuthMock extends AngularFireAuth {
+    public login() {}
+    public logout() {}
+}
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule, MaterialModule, NoopAnimationsModule],
-            declarations: [AppComponent]
+            declarations: [AppComponent],
+            providers: [{ provide: AngularFireAuth, use: AngularFireAuthMock }]
         }).compileComponents();
     }));
 
