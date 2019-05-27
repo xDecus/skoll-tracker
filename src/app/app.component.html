@@ -21,9 +21,21 @@
             </p>
             <mat-divider></mat-divider>
             <mat-nav-list>
+                <h3 matSubheader>Features</h3>
                 <a
                     mat-list-item
-                    *ngFor="let link of Mainlinks"
+                    *ngFor="let link of mainFeatureLinks"
+                    [routerLink]="link.target"
+                    (click)="snav.close()"
+                >
+                    <mat-icon>{{ link.icon }}</mat-icon>
+                    {{ link.label }}</a
+                >
+                <mat-divider></mat-divider>
+                <h3 matSubheader>Calculators</h3>
+                <a
+                    mat-list-item
+                    *ngFor="let link of calculatorLinks"
                     [routerLink]="link.target"
                     (click)="snav.close()"
                 >
