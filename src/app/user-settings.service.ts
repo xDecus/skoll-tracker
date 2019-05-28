@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DateAdapter } from '@angular/material';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ export class UserSettingsService {
      * * Since Angular's change detection and property accessor don't play nicely with each other, i've kept this variable public
      * * Only use it for read access
      */
-    public locale: 'de' | 'us' = 'us';
+    public locale: 'de-DE' | 'en-US' = 'de-DE';
 
     /**
      * Determines the default units used
@@ -26,13 +27,14 @@ export class UserSettingsService {
      */
     public userId: string = null;
 
-    constructor() {}
+    constructor(private adapter: DateAdapter<any>) {}
 
     /**
      * Sets the locale and saves it to the local storage if the user is logged in
      */
-    public setLocale(locale: 'de' | 'us') {
+    public setLocale(locale: 'de-DE' | 'en-US') {
         this.locale = locale;
+        this.adapter.setLocale(locale);
         this.saveSettings();
     }
 

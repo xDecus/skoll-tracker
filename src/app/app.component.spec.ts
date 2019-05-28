@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { DateAdapter } from '@angular/material';
 class AngularFireAuthMock extends AngularFireAuth {
     public login() {}
     public logout() {}
@@ -14,7 +15,10 @@ describe('AppComponent', () => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule, MaterialModule, NoopAnimationsModule],
             declarations: [AppComponent],
-            providers: [{ provide: AngularFireAuth, use: AngularFireAuthMock }]
+            providers: [
+                { provide: AngularFireAuth, use: AngularFireAuthMock },
+                { provide: DateAdapter, use: {} }
+            ]
         }).compileComponents();
     }));
 

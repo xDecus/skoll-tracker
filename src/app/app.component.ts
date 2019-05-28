@@ -3,6 +3,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 import { UserSettingsService } from './user-settings.service';
+import { first } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -37,7 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private _mobileQueryListener: () => void;
 
     ngOnInit() {
-        this.userSettings.initializeUserSettings(this.fireAuth.auth.currentUser);
+        this.fireAuth.user.pipe(first()).subscribe(user => {
+            this.userSettings.initializeUserSettings(user);
+        });
     }
     public login() {
         this.fireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(val => {
