@@ -26,7 +26,7 @@
                     mat-list-item
                     *ngFor="let link of mainFeatureLinks"
                     [routerLink]="link.target"
-                    (click)="snav.close()"
+                    (click)="mobileQuery.matches ? snav.close() : null"
                 >
                     <mat-icon>{{ link.icon }}</mat-icon>
                     {{ link.label }}</a
@@ -37,7 +37,7 @@
                     mat-list-item
                     *ngFor="let link of calculatorLinks"
                     [routerLink]="link.target"
-                    (click)="snav.close()"
+                    (click)="mobileQuery.matches ? snav.close() : null"
                 >
                     <mat-icon>{{ link.icon }}</mat-icon>
                     {{ link.label }}</a
@@ -47,7 +47,7 @@
                     mat-list-item
                     *ngFor="let optionLink of optionLinks"
                     [routerLink]="optionLink.target"
-                    (click)="snav.close()"
+                    (click)="mobileQuery.matches ? snav.close() : null"
                 >
                     <mat-icon>{{ optionLink.icon }}</mat-icon>
 
