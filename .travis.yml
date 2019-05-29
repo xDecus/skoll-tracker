@@ -16,6 +16,7 @@ deploy:
 branches:
     only:
         - master
+        - /^greenkeeper/.*$/
 
 before_install:
     # Repo for Yarn
