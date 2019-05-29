@@ -25,3 +25,7 @@ export class Helper {
         });
     }
 }
+
+export class DateAdapterMock {
+    setLocale() {}
+}

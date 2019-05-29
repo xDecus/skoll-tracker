@@ -1,11 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { UserSettingsService } from './user-settings.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
-class DateAdapterMock {
-    setLocale() {}
-}
+import { DateAdapterMock } from './helper';
+
 describe('UserSettingsService', () => {
     let service: UserSettingsService;
     beforeEach(() => {

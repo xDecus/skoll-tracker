@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewWeightEntryDialogComponent } from './new-weight-entry/new-weight-entry-dialog.component';
+import { LocalDBService } from '../local-db/local-db.service';
+import { WeightEntry } from '../models/weight-entry';
+import { UserSettingsService } from '../user-settings.service';
+import { MatTable } from '@angular/material/table';
+import { Observable, Subject, from } from 'rxjs';
+import { DataSource } from '@angular/cdk/table';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
     selector: 'skoll-weight-manager',
@@ -8,18 +15,40 @@ import { NewWeightEntryDialogComponent } from './new-weight-entry/new-weight-ent
     styleUrls: ['./weight-manager.component.scss']
 })
 export class WeightManagerComponent implements OnInit {
-    constructor(private dialog: MatDialog) {}
+    @ViewChild(MatTable, { static: false })
+    private table: MatTable<any>;
+
+    weight$: Subject<WeightEntry[]> = new Subject<WeightEntry[]>();
+    weights: WeightEntry[] = [];
+    displayedColumns = ['date', 'weight', 'trendWeight'];
+    constructor(
+        private dialog: MatDialog,
+        private db: LocalDBService,
+        private userSettings: UserSettingsService
+    ) {}
 
     ngOnInit() {}
 
     openAddDialog() {
         const dialogRef = this.dialog.open(NewWeightEntryDialogComponent, {
             data: {
-                weight: 0
+                date: new Date(),
+                unit: this.userSettings.unit,
+                weight: 100
             }
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            if (!result) {
+                return;
+            }
+            const entry: WeightEntry = {
+                unit: result.unit,
+                weight: result.weight,
+                date: result.date,
+                trendWeight: result.trendWeight
+            };
+            this.weights.push(entry);
+            this.weight$.next(this.weights);
         });
     }
 }

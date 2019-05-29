@@ -1,5 +1,30 @@
+@import 'skoll-base';
+
 .cool-button {
     position: fixed !important;
     bottom: 16px;
     right: 16px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-column-trendWeight {
+    text-align: right;
+}
+.mat-column-weight {
+    text-align: left;
+}
+
+form {
+    margin-top: 8px;
+}
+
+.mat-header-cell {
+    font-size: 16px;
+}
+
+.mat-cell {
+    font-size: 16px;
 }

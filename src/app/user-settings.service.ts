@@ -58,6 +58,8 @@ export class UserSettingsService {
         const settingsString = localStorage.getItem(this.userId);
         // getItem returns null if there's nothing in the storage with that key
         if (settingsString === null) {
+            this.saveSettings();
+            this.initializeUserSettings(user);
             return;
         }
 
