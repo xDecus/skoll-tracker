@@ -1,9 +1,10 @@
 import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase';
 import { UserSettingsService } from './user-settings.service';
 import { first } from 'rxjs/operators';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 
 @Component({
     selector: 'app-root',
@@ -43,7 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
         });
     }
     public login() {
-        this.fireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(val => {
+        this.fireAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(val => {
             console.log(`Successfully logged in as ${val.user.displayName}`);
             this.userSettings.initializeUserSettings(val.user);
         });
