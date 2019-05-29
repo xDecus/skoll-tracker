@@ -73,6 +73,7 @@ export class UserSettingsService {
         }
 
         this.locale = settingsObject.locale;
+        this.adapter.setLocale(this.locale);
         this.unit = settingsObject.unit;
         console.log('[UserSettingsService] Successfully loaded user data.');
     }
