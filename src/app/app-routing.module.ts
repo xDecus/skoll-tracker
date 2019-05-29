@@ -8,9 +8,14 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     {
         path: 'weight-manager',
-        loadChildren: './weight-manager/weight-manager.module#WeightManagerModule'
+        loadChildren: () =>
+            import('./weight-manager/weight-manager.module').then(m => m.WeightManagerModule)
     },
-    { path: 'calculators', loadChildren: './calculators/calculators.module#CalculatorsModule' },
+    {
+        path: 'calculators',
+        loadChildren: () =>
+            import('./calculators/calculators.module').then(m => m.CalculatorsModule)
+    },
     { path: '**', component: PageNotFoundComponent }
 ];
 

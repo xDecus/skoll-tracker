@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DateAdapter } from '@angular/material';
+import { DateAdapter } from '@angular/material/core';
 
 @Injectable({
     providedIn: 'root'

@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { DateAdapter } from '@angular/material';
+import { DateAdapter } from '@angular/material/core';
 class AngularFireAuthMock extends AngularFireAuth {
     public login() {}
     public logout() {}

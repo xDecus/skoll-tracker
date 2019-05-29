@@ -1,5 +1,22 @@
 <h1 mat-dialog-title>Add new weight entry</h1>
-<div mat-dialog-content></div>
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Date" [(ngModel)]="data.date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <input
+            class="right-align"
+            required
+            type="number"
+            matInput
+            placeholder="Weight"
+            [(ngModel)]="data.weight"
+        />
+        <span class="number-suffix" matSuffix>kg</span>
+    </mat-form-field>
+</div>
 <div mat-dialog-actions>
     <button mat-button (click)="onCancelClick()">Cancel</button>
     <button mat-raised-button color="primary" [mat-dialog-close]="{}">Add</button>

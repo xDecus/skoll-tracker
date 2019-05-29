@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { NewWeightEntryDialogComponent } from './new-weight-entry/new-weight-entry-dialog.component';
 
 @Component({
@@ -13,10 +13,10 @@ export class WeightManagerComponent implements OnInit {
     ngOnInit() {}
 
     openAddDialog() {
-        console.log('wtf');
         const dialogRef = this.dialog.open(NewWeightEntryDialogComponent, {
-            width: '250px',
-            height: '250px'
+            data: {
+                weight: 0
+            }
         });
         dialogRef.afterClosed().subscribe(result => {
             console.log('The dialog was closed');
