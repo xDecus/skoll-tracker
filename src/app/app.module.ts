@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { MatNativeDateModule } from '@angular/material';
 
 @NgModule({
     declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
@@ -27,7 +28,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatNativeDateModule
     ],
     providers: [],
     bootstrap: [AppComponent]
