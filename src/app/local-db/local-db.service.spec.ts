@@ -37,8 +37,4 @@ describe('LocalDBService', () => {
                 });
         });
     });
-
-    afterAll(() => {
-        service.deleteDatabase();
-    });
 });

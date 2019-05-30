@@ -8,6 +8,7 @@ import { MatTable } from '@angular/material/table';
 import { Observable, Subject, from } from 'rxjs';
 import { DataSource } from '@angular/cdk/table';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { TrendWeightService } from './trend-weight.service';
 
 @Component({
     selector: 'skoll-weight-manager',
@@ -24,7 +25,8 @@ export class WeightManagerComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         private db: LocalDBService,
-        private userSettings: UserSettingsService
+        private userSettings: UserSettingsService,
+        private trend: TrendWeightService
     ) {}
 
     ngOnInit() {}
@@ -48,6 +50,7 @@ export class WeightManagerComponent implements OnInit {
                 trendWeight: result.trendWeight
             };
             this.weights.push(entry);
+            this.weights.sort((x, y) => this.trend.sortByDate(x.date, y.date));
             this.weight$.next(this.weights);
         });
     }
