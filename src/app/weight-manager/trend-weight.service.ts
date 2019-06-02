@@ -10,16 +10,16 @@ export class TrendWeightService {
     constructor() {}
 
     handleTrend(reference: WeightEntry, items: WeightEntry[]) {
-        console.log(items);
+        items.sort((a, b) => this.sortByDate(a.date, b.date));
         const referenceIndex = items.indexOf(reference);
         // First, let's handle the case where this is the oldest entry
         // in since there's no ancestors, its trendWeight is its weight
         if (referenceIndex === items.length - 1) {
             reference.trendWeight = reference.weight;
+            return;
         }
         // Then, let's handle the newest entry
         if (referenceIndex === 0) {
-            console.log(`---- Calc actual weight for ${reference}`);
             const entries = this.getRelevantEntries(
                 referenceIndex,
                 items,
@@ -77,7 +77,6 @@ export class TrendWeightService {
         switch (direction) {
             case 'future':
                 {
-                    console.log(`---- Future entries for  ${all[referenceIndex].date}----`);
                     for (
                         let i = referenceIndex;
                         i >= 0 && i > referenceIndex - daysUsedForCalculation;
@@ -85,13 +84,10 @@ export class TrendWeightService {
                     ) {
                         entries.push(all[i]);
                     }
-                    console.log(entries);
-                    console.log('---------------------------------------------------------');
                 }
                 break;
             case 'past':
                 {
-                    console.log(`---- Past entries for  ${all[referenceIndex].date}----`);
                     for (
                         let i = referenceIndex;
                         i < all.length && i < referenceIndex + daysUsedForCalculation;
@@ -99,8 +95,6 @@ export class TrendWeightService {
                     ) {
                         entries.push(all[i]);
                     }
-                    console.log(entries);
-                    console.log('---------------------------------------------------------');
                 }
                 break;
         }

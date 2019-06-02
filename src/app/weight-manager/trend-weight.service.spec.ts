@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { TrendWeightService } from './trend-weight.service';
 import { WeightEntry } from '../models/weight-entry';
-import { Title } from '@angular/platform-browser';
 
-fdescribe('TrendWeightService', () => {
+describe('TrendWeightService', () => {
     let service: TrendWeightService;
     let ref: WeightEntry;
     let entries: WeightEntry[];
@@ -27,7 +26,7 @@ fdescribe('TrendWeightService', () => {
     it('should calculate trend weight for a new entry of today', () => {
         getFakeData(20, entries);
         entries.push(ref);
-
+        entries.sort((x, y) => service.sortByDate(x.date, y.date));
         const workspace = entries.slice(0, service.daysUsedForCalculation);
         const avgWeight = avg(workspace);
         service.handleTrend(ref, entries);
@@ -45,18 +44,16 @@ fdescribe('TrendWeightService', () => {
         expect(ref.trendWeight).toBe(avgWeight);
     });
 
-    fit('should handle inserting values in the middle', () => {
+    it('should handle inserting values in the middle', () => {
         getFakeData(20, entries, 2);
         ref.date = new Date(2018, 0, 12).toISOString();
         entries.push(ref);
 
         service.handleTrend(ref, entries);
-        console.log(entries);
     });
 
     it('should return future entries', () => {
         getFakeData(18, entries);
-        console.log(entries);
         const result = (service as any).getRelevantEntries(9, entries, 10, 'future');
         expect(result[0].date).toBe(entries[9].date);
         expect(result[9].date).toBe(entries[0].date);
@@ -68,6 +65,12 @@ fdescribe('TrendWeightService', () => {
         const result = (service as any).getRelevantEntries(9, entries, 10, 'past');
         expect(result[0].date).toBe(entries[9].date);
         expect(result[9].date).toBe(entries[18].date);
+    });
+
+    it('should sort by date with the newest one first', () => {
+        getFakeData(10, entries);
+        entries.sort((x, y) => service.sortByDate(x.date, y.date));
+        expect(entries[0].date).toBe(new Date(2018, 0, 11).toISOString());
     });
 });
 
