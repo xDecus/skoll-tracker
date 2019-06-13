@@ -2,7 +2,7 @@ import { IWeightEntry } from './weight-entry.interface';
 
 export class WeightEntry implements IWeightEntry {
     id?: number;
-    trendWeight: number;
+    trendWeight?: number;
     weight: number;
     unit: 'imperial' | 'metric';
     date: string;

@@ -15,6 +15,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
 
+<input type="file" id="file" (change)="handleFileInput($event.target.files)" />
 <button class="cool-button" mat-fab color="primary" aria-label="add" (click)="openAddDialog()">
     <mat-icon>add</mat-icon>
 </button>

@@ -9,7 +9,7 @@ export class TrendWeightService {
 
     constructor() {}
 
-    handleTrend(reference: WeightEntry, items: WeightEntry[]) {
+    handleTrend(reference: WeightEntry, items: WeightEntry[], forceCalc: boolean = false) {
         // First, sort the entries we're getting so that index 0 is the most current date
         items.sort((a, b) => this.sortByDate(a.date, b.date));
         const referenceIndex = items.indexOf(reference);
@@ -17,7 +17,7 @@ export class TrendWeightService {
         console.log(items);
         console.log(referenceIndex);
         // If the referenceIndex is 0, that means we can simpy calculate the trend weight for this entry
-        if (referenceIndex === 0) {
+        if (referenceIndex === 0 || forceCalc) {
             const relevantEntries = this.getRelevantEntries(
                 referenceIndex,
                 items,
@@ -50,7 +50,7 @@ export class TrendWeightService {
      */
     public recalculateTrends(items: WeightEntry[]) {
         for (let i = items.length - 1; i >= 0; i--) {
-            this.handleTrend(items[i], items);
+            this.handleTrend(items[i], items, true);
         }
     }
 
