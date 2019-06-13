@@ -10,40 +10,37 @@ export class TrendWeightService {
     constructor() {}
 
     handleTrend(reference: WeightEntry, items: WeightEntry[]) {
+        // First, sort the entries we're getting so that index 0 is the most current date
         items.sort((a, b) => this.sortByDate(a.date, b.date));
         const referenceIndex = items.indexOf(reference);
-        // First, let's handle the case where this is the oldest entry
-        // in since there's no ancestors, its trendWeight is its weight
-        if (referenceIndex === items.length - 1) {
-            reference.trendWeight = reference.weight;
-            return;
-        }
-        // Then, let's handle the newest entry
+
+        console.log(items);
+        console.log(referenceIndex);
+        // If the referenceIndex is 0, that means we can simpy calculate the trend weight for this entry
         if (referenceIndex === 0) {
-            const entries = this.getRelevantEntries(
+            const relevantEntries = this.getRelevantEntries(
                 referenceIndex,
                 items,
                 this.daysUsedForCalculation
             );
-            reference.trendWeight = this.calculateAverage(entries);
+            console.log(relevantEntries);
+            reference.trendWeight = this.calculateAverage(relevantEntries);
         } else {
-            // Else, the reference is somewhere else in the array.
-            // In that case we'll get us an array that contains the reference
-            // and its trend dependants (the entries that use it for their trend calculation)
-            const entries = this.getRelevantEntries(
+            // Otherwise, we added a new reference somewhere in the middle
+            // This means we need to iterate over the entries that are affected by this entry
+            const affectedEntries = this.getRelevantEntries(
                 referenceIndex,
                 items,
                 this.daysUsedForCalculation,
                 'future'
             );
-            // Then we recalculate each entry's trend weight by passing it into this func
-            entries.forEach(entry => {
-                const relevant = this.getRelevantEntries(
-                    entries.indexOf(entry),
-                    entries,
+            affectedEntries.forEach(entry => {
+                const x = this.getRelevantEntries(
+                    items.indexOf(entry),
+                    items,
                     this.daysUsedForCalculation
                 );
-                this.handleTrend(relevant[0], relevant);
+                this.handleTrend(entry, x);
             });
         }
     }
@@ -103,9 +100,10 @@ export class TrendWeightService {
     }
 
     private calculateAverage(entries: WeightEntry[]): number {
-        return (
+        const avg =
             entries.map(entry => entry.weight).reduce((total, current) => total + current) /
-            entries.length
-        );
+            entries.length;
+        console.log(avg);
+        return Math.round(avg * 10) / 10;
     }
 }

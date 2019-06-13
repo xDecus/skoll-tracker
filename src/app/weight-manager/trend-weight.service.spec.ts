@@ -12,7 +12,7 @@ describe('TrendWeightService', () => {
         service = TestBed.get(TrendWeightService);
         entries = [];
         ref = {
-            weight: 500,
+            weight: 210,
             date: new Date(2018, 1, 25).toISOString(),
             trendWeight: 0,
             unit: 'metric'
@@ -45,11 +45,20 @@ describe('TrendWeightService', () => {
     });
 
     it('should handle inserting values in the middle', () => {
-        getFakeData(20, entries, 2);
-        ref.date = new Date(2018, 0, 12).toISOString();
-        entries.push(ref);
-
-        service.handleTrend(ref, entries);
+        getFakeData(21, entries);
+        const r = entries.find(e => e.weight === 210);
+        service.handleTrend(r, entries);
+        console.log(entries);
+        expect(entries[0].trendWeight).toBe(255);
+        expect(entries[1].trendWeight).toBe(245);
+        expect(entries[2].trendWeight).toBe(235);
+        expect(entries[3].trendWeight).toBe(225);
+        expect(entries[4].trendWeight).toBe(215);
+        expect(entries[5].trendWeight).toBe(205);
+        expect(entries[6].trendWeight).toBe(195);
+        expect(entries[7].trendWeight).toBe(185);
+        expect(entries[8].trendWeight).toBe(175);
+        expect(entries[9].trendWeight).toBe(165);
     });
 
     it('should return future entries', () => {
@@ -61,7 +70,6 @@ describe('TrendWeightService', () => {
 
     it('should return past entries', () => {
         getFakeData(19, entries);
-        console.log(entries);
         const result = (service as any).getRelevantEntries(9, entries, 10, 'past');
         expect(result[0].date).toBe(entries[9].date);
         expect(result[9].date).toBe(entries[18].date);
@@ -74,10 +82,10 @@ describe('TrendWeightService', () => {
     });
 });
 
-function getFakeData(amount: number, array: WeightEntry[], step = 1) {
-    for (let i = 0; i < amount * step; i += step) {
+function getFakeData(amount: number, array: WeightEntry[]) {
+    for (let i = 0; i < amount; i++) {
         array.push({
-            weight: i,
+            weight: 100 + 10 * i,
             date: new Date(2018, 0, i + 2).toISOString(),
             trendWeight: 0,
             unit: 'metric'
@@ -86,5 +94,11 @@ function getFakeData(amount: number, array: WeightEntry[], step = 1) {
 }
 
 function avg(arr: WeightEntry[]) {
-    return arr.map(entry => entry.weight).reduce((total, current) => total + current) / arr.length;
+    return (
+        Math.round(
+            (arr.map(entry => entry.weight).reduce((total, current) => total + current) /
+                arr.length) *
+                10
+        ) / 10
+    );
 }

@@ -47,10 +47,10 @@ export class WeightManagerComponent implements OnInit {
                 unit: result.unit,
                 weight: result.weight,
                 date: result.date,
-                trendWeight: result.trendWeight
+                trendWeight: 0
             };
             this.weights.push(entry);
-            this.weights.sort((x, y) => this.trend.sortByDate(x.date, y.date));
+            this.trend.handleTrend(entry, this.weights);
             this.weight$.next(this.weights);
         });
     }
