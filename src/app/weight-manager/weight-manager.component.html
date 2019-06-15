@@ -1,4 +1,8 @@
-<table mat-table [dataSource]="this.weight$" class="mat-elevation-z8">
+<div class="chart">
+    <canvas #skollchart></canvas>
+</div>
+
+<!-- <table mat-table [dataSource]="this.weight$" class="mat-elevation-z8">
     <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef>Date</th>
         <td mat-cell *matCellDef="let element">{{ element.date | date }}</td>
@@ -13,7 +17,7 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+</table> -->
 
 <input type="file" id="file" (change)="handleFileInput($event.target.files)" />
 <button class="cool-button" mat-fab color="primary" aria-label="add" (click)="openAddDialog()">

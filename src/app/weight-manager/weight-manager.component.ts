@@ -1,27 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewWeightEntryDialogComponent } from './new-weight-entry/new-weight-entry-dialog.component';
 import { LocalDBService } from '../local-db/local-db.service';
 import { WeightEntry } from '../models/weight-entry';
 import { UserSettingsService } from '../user-settings.service';
 import { MatTable } from '@angular/material/table';
-import { Observable, Subject, from } from 'rxjs';
-import { DataSource } from '@angular/cdk/table';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Subject } from 'rxjs';
 import { TrendWeightService } from './trend-weight.service';
 import * as papaparse from 'papaparse';
+import * as Chart from 'chart.js';
 
 @Component({
     selector: 'skoll-weight-manager',
     templateUrl: './weight-manager.component.html',
     styleUrls: ['./weight-manager.component.scss']
 })
-export class WeightManagerComponent implements OnInit {
+export class WeightManagerComponent implements OnInit, AfterViewInit {
     @ViewChild(MatTable, { static: false })
     private table: MatTable<any>;
 
+    @ViewChild('skollchart', { static: false })
+    private canvasRef: ElementRef;
+
+    chart: Chart;
     weight$: Subject<WeightEntry[]> = new Subject<WeightEntry[]>();
     weights: WeightEntry[] = [];
+    weightData: { x: Date; y: number }[] = [];
     displayedColumns = ['date', 'weight', 'trendWeight'];
     constructor(
         private dialog: MatDialog,
@@ -31,6 +35,28 @@ export class WeightManagerComponent implements OnInit {
     ) {}
 
     ngOnInit() {}
+
+    ngAfterViewInit(): void {
+        this.chart = new Chart(this.canvasRef.nativeElement, {
+            type: 'line',
+
+            data: {
+                datasets: [
+                    {
+                        data: this.weightData,
+                        borderColor: '#009688',
+                        backgroundColor: 'rgba(0, 150, 136, 0.4)'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{ type: 'time', time: { unit: 'month' } }]
+                },
+                legend: { display: false }
+            }
+        });
+    }
 
     openAddDialog() {
         const dialogRef = this.dialog.open(NewWeightEntryDialogComponent, {
@@ -55,22 +81,19 @@ export class WeightManagerComponent implements OnInit {
             this.weight$.next(this.weights);
         });
     }
-    handleFileInput(evn) {
-        console.log(evn[0]);
-        const parsed = papaparse.parse(evn[0], {
+    public handleFileInput(files) {
+        papaparse.parse(files[0], {
             complete: this.processImportedData.bind(this)
         });
     }
 
-    processImportedData(results: papaparse.ParseResult) {
+    private processImportedData(results: papaparse.ParseResult) {
         if (results.errors.length > 0) {
             console.error(results.errors);
         }
-        console.log(results.data);
         const unit: 'metric' | 'imperial' =
             results.data[1][0].split(':')[1] === 'kg' ? 'metric' : 'imperial';
         const cleaned = results.data.slice(4, results.data.length - 1);
-        console.log(cleaned);
         const weightEntries: WeightEntry[] = cleaned.map((val: string[]) => {
             return {
                 date: new Date(val[0]).toISOString(),
@@ -80,6 +103,11 @@ export class WeightManagerComponent implements OnInit {
         });
         this.weights.push(...weightEntries);
         this.trend.recalculateTrends(this.weights);
+        const dataPoints = this.weights.map(entry => {
+            return { x: new Date(entry.date), y: entry.trendWeight };
+        });
+        this.weightData.push(...dataPoints);
+        this.chart.update();
         this.weight$.next(this.weights);
     }
 }

@@ -9,13 +9,18 @@ export class TrendWeightService {
 
     constructor() {}
 
-    handleTrend(reference: WeightEntry, items: WeightEntry[], forceCalc: boolean = false) {
+    /**
+     * Calculates the trend weight for the given reference entry and a list of other weight entries.
+     * @param reference The entry to calculate the trend for. Should be included in items
+     * @param items The other entries, used for calculation of the rolling average
+     * @param forceCalc Whether the calculation of the trend should be forced. This option will simply
+     *  calculate the trend and will not recalculate other entries that might be affected.
+     */
+    public handleTrend(reference: WeightEntry, items: WeightEntry[], forceCalc: boolean = false) {
         // First, sort the entries we're getting so that index 0 is the most current date
         items.sort((a, b) => this.sortByDate(a.date, b.date));
         const referenceIndex = items.indexOf(reference);
 
-        console.log(items);
-        console.log(referenceIndex);
         // If the referenceIndex is 0, that means we can simpy calculate the trend weight for this entry
         if (referenceIndex === 0 || forceCalc) {
             const relevantEntries = this.getRelevantEntries(
@@ -23,7 +28,6 @@ export class TrendWeightService {
                 items,
                 this.daysUsedForCalculation
             );
-            console.log(relevantEntries);
             reference.trendWeight = this.calculateAverage(relevantEntries);
         } else {
             // Otherwise, we added a new reference somewhere in the middle
