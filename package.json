@@ -47,7 +47,7 @@
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "~12.0.3",
         "@types/papaparse": "^4.5.9",
-        "@types/chart.js": "^2.7.53",
+        "@types/chart.js": "^2.8.1",
         "codelyzer": "~5.1.0",
         "faker": "^4.1.0",
         "jasmine-core": "~3.4.0",
