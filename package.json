@@ -30,7 +30,7 @@
         "core-js": "^3.1.3",
         "dexie": "^2.0.4",
         "dexie-observable": "^1.0.0-beta.5",
-        "firebase": "^6.0.4",
+        "firebase": "^7.1.0",
         "hammerjs": "^2.0.8",
         "ngx-take-until-destroy": "^5.4.0",
         "papaparse": "^5.0.0",
