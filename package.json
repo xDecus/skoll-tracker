@@ -22,7 +22,7 @@
         "@angular/material": "^8.0.0",
         "@angular/platform-browser": "~8.0.0",
         "@angular/platform-browser-dynamic": "~8.0.0",
-        "@angular/pwa": "^0.800.3",
+        "@angular/pwa": "^0.803.14",
         "@angular/router": "~8.0.0",
         "@angular/service-worker": "~8.0.0",
         "chart.js": "^2.8.0",
